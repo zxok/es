@@ -1,0 +1,11 @@
+server:
+  port: 8081
+
+spring:
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+      cluster-nodes: 101.37.159.158:9300
+
+

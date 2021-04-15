@@ -1,0 +1,59 @@
+version: "3"
+services:
+  # 监控工具
+  cerebro:
+    image: lmenezes/cerebro:0.9.2
+    container_name: cerebro
+    ports:
+      - "9000:9000"
+    command:
+      - -Dhosts.0.host=http://es780:9200
+    networks:
+      - es7net
+  kibana:
+    image: kibana:7.8.0
+    container_name: kibana780
+    environment:
+      - XPACK_GRAPH_ENABLED=true
+      - TIMELION_ENABLED=true
+      - XPACK_MONITORING_COLLECTION_ENABLED="true"
+      - I18N_LOCALE=zh-CN
+      - ELASTICSEARCH_HOSTS=http://es780:9200
+      # 配置账号密码
+      # - ELASTICSEARCH_USERNAME=admin
+      # - ELASTICSEARCH_PASSWORD=admin
+    ports:
+      - "5601:5601"
+    networks:
+      - es7net
+  # 伊拉丝忒克色七
+  elasticsearch:
+    image: elasticsearch:7.8.0
+    container_name: es780
+    environment:
+      # 开启内存锁定
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      # 指定单节点启动
+      - discovery.type=single-node
+    ulimits:
+      # 取消内存相关限制  用于开启内存锁定
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/logs:/usr/share/elasticsearch/logs
+      - ./elasticsearch/plugins/ik-7.8.0:/usr/share/elasticsearch/plugins/ik-7.8.0
+    ports:
+      # 9200 HTTP接口 各种CRUD操作端口
+      - 9200:9200
+      # 9300 tcp通讯端口，集群间。
+      - 9300:9300
+    networks:
+      - es7net
+networks:
+  es7net:
+    name: es7net
+    # 桥接模式
+    driver: bridge
