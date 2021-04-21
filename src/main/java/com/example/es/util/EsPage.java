@@ -2,6 +2,8 @@ package com.example.es.util;
 
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Map;

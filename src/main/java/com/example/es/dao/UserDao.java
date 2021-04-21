@@ -1,6 +1,8 @@
 package com.example.es.dao;
 
-import com.example.es.entity.TestBean;
+import com.example.es.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -22,15 +24,18 @@ import java.util.Optional;
  * 继承CRUD，第一个泛型是实体类类型，第二个泛型是id的类型
  */
 @Repository
-public interface TestDao extends CrudRepository<TestBean, Long> {
-    List<TestBean> findByName(String name);
+public interface UserDao extends CrudRepository<User, Long> {
+    List<User> findByName(String name);
 
-    List<TestBean> findByDesc(String desc);
+    List<User> findByDesc(String desc);
 
-    List<TestBean> findByNameOrDesc(String name,String desc);
+    List<User> findByNameOrDesc(String name, String desc);
 
     @Override
-    Optional<TestBean> findById(Long aLong);
+    Optional<User> findById(Long aLong);
+
+    Page<User> search(SearchQuery searchQuery);
+
 }
 
 

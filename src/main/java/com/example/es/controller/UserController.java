@@ -1,8 +1,8 @@
 package com.example.es.controller;
 
 
-import com.example.es.entity.TestBean;
-import com.example.es.service.TestService;
+import com.example.es.entity.User;
+import com.example.es.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,14 +23,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/testes")
-public class TestController {
+public class UserController {
 
     @Autowired
-    TestService testService;
+    UserService userService;
 
     @RequestMapping("findAll")
-    public Iterable<TestBean> findAll() {
-        return testService.findAll();
+    public Iterable<User> findAll() {
+        return userService.findAll();
     }
 
     /**
@@ -38,8 +38,8 @@ public class TestController {
      */
     @RequestMapping("list")
     public String save() {
-        List<TestBean> list = null;
-        testService.save(list);
+        List<User> list = null;
+        userService.save(list);
         return "success";
     }
 
@@ -48,30 +48,32 @@ public class TestController {
      * @param bean
      */
     @RequestMapping("save")
-    public String save(TestBean bean) {
-        testService.save(bean);
+    public String save(User bean) {
+        userService.save(bean);
         return "OK";
     }
 
     @RequestMapping("findByName")
-    public List<TestBean> findByName(String name) {
-        return testService.findByName(name);
+    public List<User> findByName(String name) {
+        return userService.findByName(name);
     }
 
     @RequestMapping("findByNameOrDesc")
-    public List<TestBean> findByNameOrDesc(String name,String desc) {
-        return testService.findByNameOrDesc(name,desc);
+    public List<User> findByNameOrDesc(String name, String desc) {
+        return userService.findByNameOrDesc(name,desc);
     }
 
     @RequestMapping("findByDesc")
-    public List<TestBean> findByDesc(String desc) {
-        return testService.findByDesc(desc);
+    public List<User> findByDesc(String desc) {
+        return userService.findByDesc(desc);
     }
 
     @RequestMapping("findById")
-    public TestBean findById(long id) {
-        return testService.findById(id);
+    public User findById(long id) {
+        return userService.findById(id);
     }
+
+
 
 }
 

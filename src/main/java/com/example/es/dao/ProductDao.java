@@ -17,7 +17,12 @@ import java.util.Optional;
 @Repository
 public interface ProductDao extends ElasticsearchRepository<Product,String> {
 
+    Iterable<Product> findByName(String name);
+
     @Override
+    long count();
+
+    /*@Override
     <S extends Product> S index(S s);
 
     @Override
@@ -75,5 +80,5 @@ public interface ProductDao extends ElasticsearchRepository<Product,String> {
     void deleteAll(Iterable<? extends Product> iterable);
 
     @Override
-    void deleteAll();
+    void deleteAll();*/
 }

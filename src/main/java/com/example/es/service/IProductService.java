@@ -10,7 +10,18 @@ import java.util.List;
  */
 public interface IProductService {
 
+    /**
+     * 查询所有数据
+     * @return
+     */
     Iterable<Product> findAll();
+
+    /**
+     * 根据名称搜索
+     * @param name
+     * @return
+     */
+    Iterable<Product> findByName(String name);
 
     /**
      * @return
@@ -40,13 +51,6 @@ public interface IProductService {
     void delete(Product product);
 
     /**
-     * @return
-     */
-    Iterable<Product> getList();
-
-    List<Product> getByName(String name);
-
-    /**
      * 分页查询
      *
      * @param pageNo
@@ -54,7 +58,8 @@ public interface IProductService {
      * @param kw
      * @return
      */
-    Page<Product> pageQuery(Integer pageNo, Integer pageSize, String kw);
+    //Page<Product> pageQuery(Integer pageNo, Integer pageSize, String kw);
+    Iterable<Product> pageQuery(Integer pageNo, Integer pageSize, String kw);
 
     /**
      * 创建索引

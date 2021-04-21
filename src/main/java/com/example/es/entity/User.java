@@ -17,11 +17,11 @@ import lombok.Data;
 @Data
 //通过这个注解可以声明一个文档，指定其所在的索引库和type
 @Document(indexName = "testdoct", type = "testbean")
-public class TestBean implements Serializable {
-    public TestBean() {
+public class User implements Serializable {
+    public User() {
     }
 
-    public TestBean(long id, String name, Integer age, String sex, String desc) {
+    public User(long id, String name, Integer age, String sex, String desc) {
         this.id = id;
         this.name = name;
         this.age = age;

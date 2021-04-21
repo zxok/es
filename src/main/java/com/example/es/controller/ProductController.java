@@ -23,14 +23,38 @@ public class ProductController {
         return "ProductController-test";
     }
 
+    @GetMapping("page")
+    public Iterable<Product> page(Integer pageNo, Integer pageSize, String kw) {
+        return productService.pageQuery(pageNo,pageSize,kw);
+    }
+
     @GetMapping("findAll")
     public Iterable<Product> findAll() {
         return productService.findAll();
+    }
+
+    @GetMapping("findByName")
+    public Iterable<Product> findByName(String name) {
+        return productService.findByName(name);
     }
 
     @PostMapping("add")
     public Product addProduct(Product product) {
         return productService.add(product);
     }
+
+    @PutMapping("addIndex")
+    public boolean createIndex() {
+        productService.createIndex();
+        return true;
+    }
+
+    @DeleteMapping("delIndex")
+    public boolean deleteIndex() {
+        productService.deleteIndex("1");
+        return true;
+    }
+
+
 
 }
